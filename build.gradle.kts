@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.daymxn"
-version = "0.9.15"
+version = "0.9.16"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11

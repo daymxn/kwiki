@@ -44,7 +44,7 @@ fun generateAstroRootConfig(website: String, base: String? = null) =
         		react(),
         	],
         	site: "$website",
-            ${base?.let { "base: '$it'," }}
+            ${base?.let { "base: '$it'," } ?: ""}
         	markdown: {
         		syntaxHighlight: 'prism'
         	}
