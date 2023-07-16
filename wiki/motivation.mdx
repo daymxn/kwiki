@@ -1,0 +1,61 @@
+# Motivation
+
+One of the most important aspects of engineering [that often gets neglected] is documentation.
+I pride myself on my dedication to not only annotating my projects- but documenting them as well. The most convenient way
+I've found to do this, at least for myself, is in markdown files. They're easy to ship directly with the source, are
+supported natively basically everywhere, and have more than enough features to accomplish any basic task needed. The biggest benefit though,
+is that because of how easy they are to write, writing documentation for projects takes next to no cognitive overhead.
+The drawback though, is that you are limited to a fairly basic style of consumption. Markdown files are [typically] fairly
+bare-bones; which to be fair, is the intention. If you want to make documentation that looks prettier, you typically have
+to resort to writing the documentation in a more web-oriented way, like via [react](). There _are_, however, various
+tools you can use to do this via markdown instead. In researching these options, I found that I didn't really like any
+of the options. The biggest reasons being;
+
+- They lacked modern appeal; visually they looked out-dated
+- They don't support static asset generation; I intend to host my documentation via GitHub pages
+- They are unnecessarily complex; I want to spend time writing my documentation, not debugging it
+- They aren't easy to integrate with existing system I use for my projects; Kotlin and Gradle
+- They aren't maintained anymore
+
+To solve this problem, I decided to come up with my own solution.
+
+## Nextra
+
+In my recent ventures down the wiki generation rabbit-hole, I ran across a particularly beautiful theme, with commits
+_hours_ ago. That would be none other than [Nextra](https://github.com/shuding/nextra). Huge shout-out
+to folks over at [Vercel](), as none of this would be possible without them. Although this could change in the future,
+they are the current meat and bones of our doc generation. The only problem is; nextra is built for [Node.js]()
+applications (or more appropriately, [Next.js]()).
+
+This is where we come in. We've essentially taken Nextra, and wrapped it in a pretty little package that is
+idiomatic to use in Kotlin + Gradle. We expose a [Gradle Plugin]() that exposes [properties]() to which consumers can
+[configure their wiki](). We then facilitate that configuration to our own instance of Nextra- and handle all the node
+related tasks behind the scenes; taking advantage of Gradle's [task configurations]() and [cache optimizations]() along
+the way.
+
+## Result
+
+What do we end up with after all our hard work? An easy to use, and easy to integrate (very important distinction),
+tool for doc generation. Moving forward, all I have to do is add a dependency on the kWiki plugin:
+
+```
+plugins {
+  id("com.daymxn.kwiki")
+}
+```
+
+Add some configurations:
+
+```
+kWiki {
+  wikiSourceDirectory.set(project.file("wiki"))
+  outputDirectory.set(project.file("docs"))
+
+  theme {
+    icon.set(project.file("wiki/logo.ico"))
+  }
+}
+```
+
+And I'm done. I can now spend time _actually writing_ my documentation, and not worrying about how it will function or
+look in the end.

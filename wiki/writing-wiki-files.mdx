@@ -1,0 +1,44 @@
+# Writing Wiki Files
+
+################## TODO() - should some text go here? ################## look at the others as well ##################
+
+## Choosing a directory
+
+The first step is choosing where to store your wiki files. By default, kWiki looks for a `docs` directory at the
+project level.
+
+![ss of example dir]
+
+Although, you can change this behavior via the `sourceDirectory` property in your kWiki configuration.
+
+```kotlin
+kWiki {
+    sourceDirectory.set(project.files("documentation"))
+}
+```
+
+Instead of looking for a directory named `docs`, kWiki will now look in the `documentation` directory for your wiki files.
+
+## Content
+
+Your wiki files should be written in `.md` files under your defined `sourceDirectory`. As far as how your content is written,
+kWiki follows the GFM (GitHub Flavored Markdown) spec. If you're unfamiliar with what that entails, you can read all about it
+via [GitHub's formal specification](https://github.github.com/gfm/).
+
+## Easy Edit
+
+On the right side of every page there exists a small text: `Edit this page on GitHub`. Clicking this text will link the
+reader to the respective page in your GitHub repo.
+
+![gif example]
+
+By default, this links to the [kWiki](https://github.com/daymxn/kwiki) repo. You can change this to your own by setting
+the `githubDocumentation` property of your `ThemeOptions`:
+
+```kotlin
+kWiki {
+    theme {
+        githubDocumentation.set("https://github.com/daymxn/khtml/wiki")
+    }
+}
+```

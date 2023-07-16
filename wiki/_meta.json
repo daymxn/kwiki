@@ -1,0 +1,15 @@
+{
+  "index": "Index",
+  "motivation": "Motivation",
+  "---": {
+    "type": "separator"
+  },
+  "getting-started": "Getting Started",
+  "writing-wiki-files": "Writing Wiki Files",
+  "toc": "Table of Contents",
+  "configuration": "Configuration",
+  "branding": "Branding",
+  "building": "Building",
+  "publishing": "Publishing",
+  "advanced": "Advanced Topics"
+}

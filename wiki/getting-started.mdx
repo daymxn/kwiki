@@ -1,0 +1,77 @@
+# Getting Started
+
+The intention behind kWiki is to let you quickly write your wiki pages in markdown, do some light configuration, and
+generate a static website at the click of a button; as such, systems are designed to facilitate straight forward usage.
+
+I'll give you a quick run through of all the systems kWiki has to offer, and then we'll go more in depth in the
+following pages.
+
+### Create your documentation
+
+You write your documentation in [Markdown format](), anywhere you want (although the standard is a `docs` directory at the
+root of your project).
+
+```
+project/
+  docs/
+    index.mdx
+    getting-started.mdx
+  src/
+  build.gradle.kts
+```
+
+### Organize your documentation
+
+You write small json files called `_meta.json` to clarify the ToC (Table of Contents) of your wiki.
+
+```
+docs/
+    index.mdx
+    getting-started.mdx
+    _meta.json
+```
+
+***_meta.json***
+```json
+{
+  "index": "Overview",
+  "getting-started": "Getting Started!"
+}
+```
+
+### Customize your documentation
+
+When you want to add some customization to your wiki, you can do so in your build script via the `kWikiPluginExtension`.
+
+```kotlin
+kWiki {
+  theme {
+    feedbackLink.set(false)
+    githubDocumentation.set("$githubUrl/wiki")
+    icon.set(project.file("wiki/logo.ico"))
+    navbar {
+      logo.set(project.file("wiki/logoWithText.svg"))
+      projectIcon.link.set(githubUrl)
+    }
+    footer {
+      enabled.set(false)
+    }
+  }
+}
+```
+
+### Build your documentation
+
+When you're ready to see the final product, you can build your wiki with the `kWiki` task:
+
+```bash
+./gradlew kWiki
+```
+
+This will build your wiki, and export the static html files to whatever output directory you specified in the kWiki
+configuration block.
+
+## Publish your documentation
+
+We have [a sample GitHub action you can use]() if you intend to publish to GitHub pages, otherwise you can upload your
+static documentation to any hosting provider that supports it.
